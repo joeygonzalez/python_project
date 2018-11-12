@@ -1,0 +1,40 @@
+-- Question A
+select 
+claim.ClaimId,
+claim.FirstName,
+claim.LastName,
+claim.SSN,
+cov.CoverageType,
+cov.Status
+from
+dbo.Claim claim, dbo.Coverage cov
+where 
+claim.ClaimId = cov.ClaimId
+
+-- Question B
+select
+claim.ClaimId,
+claim.SSN,
+cov.CoverageType,
+cov.BenefitsBeginDate,
+add.Linel,
+add.City,
+add.State,
+add.Zip
+from 
+dbo.Claim claim, dbo.Coverage cov, dbo.Address add
+where
+claim.ClaimId = cov.ClaimId
+and
+cov.ClaimId = add.ClaimId
+and
+cov.BenefitsBeginDate >= '2003-01-01'
+
+-- Question C
+select
+ClaimId,
+FirstName,
+LastName,
+SSN
+from dbo.Claims
+where SSN not in (select SSN from dbo.SSN_File)
